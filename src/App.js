@@ -1,12 +1,25 @@
-import './App.scss';
+import "./App.scss";
+import { connect } from "react-redux";
+import userAuth from "./redux/operations/userOperations";
 
+function App(props) {
+  const clickHandler = () => {
+    props.register({
+      nickname: "Jora",
+      password: "12345",
+    });
+  };
 
-function App() {
   return (
     <div className="App">
       <h1>Hello world</h1>
+      <button onClick={clickHandler}>Submit</button>
     </div>
   );
 }
 
-export default App;
+const mapDispatchToProps = {
+  register: userAuth.register,
+};
+
+export default connect(null, mapDispatchToProps)(App);
