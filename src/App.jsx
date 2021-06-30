@@ -1,13 +1,12 @@
 import "./App.scss";
 import { Suspense } from "react";
 import { Switch } from "react-router-dom";
-import { connect } from "react-redux";
 import PrivateRoute from "./privateRoute";
 import PublicRoute from "./publicRoute";
 import routes from "./routes";
-import userAuth from "./redux/operations/userOperations";
+import Header from "./components/Header/Header";
 
-function App(props) {
+export default function App(props) {
   const routesMap = routes.map((route) => {
     return route.privated ? (
       <PrivateRoute key={route.path} {...route} />
@@ -18,7 +17,7 @@ function App(props) {
   return (
     <>
       <div className="App">
-        <h1>Hello world</h1>
+        <Header />
       </div>
       <Suspense fallback="Loading">
         <Switch>{routesMap}</Switch>
@@ -26,9 +25,3 @@ function App(props) {
     </>
   );
 }
-
-const mapDispatchToProps = {
-  register: userAuth.register,
-};
-
-export default connect(null, mapDispatchToProps)(App);
