@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import userOperations from "../../redux/operations/userOperations";
 import { useDispatch } from "react-redux";
+import styles from './AuthForm.module.scss';
 
 const registerSchema = Yup.object().shape({
   name: Yup.string()
@@ -30,7 +31,11 @@ export default function AuthForm() {
   const [isRegister, setRegister] = useState(true);
 
   return (
+    <div className={styles.mainContainer}>
+
+    
     <Formik
+    
       initialValues={
         isRegister
           ? { name: "", email: "", password: "" }
@@ -47,18 +52,22 @@ export default function AuthForm() {
       }}
       validationSchema={isRegister ? registerSchema : loginSchema}
     >
+
       <Form>
+      <div className={styles.formContainer}>
         {isRegister && (
           <>
-            <Field type="name" name="name" placeholder="name" />
-            <ErrorMessage name="name" component="div" />
+            <Field type="name" name="name" placeholder="name" className={styles.inputForm}/>
+            <ErrorMessage name="name" component="span" className={styles.spanFormError} />
           </>
         )}
-        <Field type="email" name="email" placeholder="e-mail" />
-        <ErrorMessage name="email" component="div" />
-        <Field type="password" name="password" placeholder="password" />
-        <ErrorMessage name="password" component="div" />
-        <button type="submit" disabled={isSubmitting}>
+        <Field type="email" name="email" placeholder="e-mail" className={styles.inputForm} />
+        <ErrorMessage name="email" component="span" className={styles.spanFormError} />
+        <Field type="password" name="password" placeholder="password" className={styles.inputForm} />
+        <ErrorMessage name="password" component="span" className={styles.spanFormError} />
+        </div>
+        <div className={styles.buttonContainer}>
+        <button type="submit" disabled={isSubmitting} className={styles.buttonForm}>
           Submit
         </button>
         <button
@@ -66,10 +75,14 @@ export default function AuthForm() {
           onClick={() => {
             setRegister(!isRegister);
           }}
+          className={styles.buttonForm}
         >
           {isRegister ? "Sign In" : "Sign Up"}
         </button>
+        </div>
+        
       </Form>
     </Formik>
+    </div>
   );
 }

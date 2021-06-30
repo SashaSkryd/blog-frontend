@@ -1,0 +1,55 @@
+.mainContainer {
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+}
+
+.formContainer {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.inputForm {
+  width: 240px;
+  height: 28px;
+  padding: 0 20px 0 20px;
+  border: solid 2px white;
+  border-radius: 10px;
+  transition: all 250ms linear;
+  outline: none;
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+  &:hover {
+    border-color: rgb(107, 19, 19);
+    
+    }
+    &::placeholder{
+        color: black;
+        font-style: italic;
+    }
+}
+.spanFormError {
+  color: red;
+}
+.buttonContainer {
+  margin: 30px 0 30px;
+  display: flex;
+  justify-content: center;
+}
+.buttonForm {
+  width: 60px;
+  height: 28px;
+  background-color: transparent;
+  color: white;
+  border: solid 2px white;
+  border-radius: 10px;
+  transition: all 250ms linear;
+  &:nth-of-type(2) {
+    margin-left: 20px;
+  }
+  &:hover {
+    background-color: rgb(107, 19, 19);
+    border: none;
+    }
+}
