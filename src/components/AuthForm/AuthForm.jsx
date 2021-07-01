@@ -47,7 +47,7 @@ export default function AuthForm() {
           setSubmitting(true);
           isRegister
             ? dispatch(userOperations.register({ name, email, password }))
-            : dispatch(userOperations.login(values));
+            : dispatch(userOperations.login({email, password}));
           setTimeout(() => {
             setSubmitting(false);
           }, 500);
