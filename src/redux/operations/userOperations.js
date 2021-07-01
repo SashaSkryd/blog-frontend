@@ -28,9 +28,10 @@ class UserAuth {
       login = (credentials) => async (dispatch) => {
         dispatch(authActions.loginRequest());
         try{
-          const response = await axios.put("/blog/user", credentials);
+          const response = await axios.put("/user", credentials);
           dispatch(authActions.loginSuccess(response.data));
         }catch(error){
+          console.log("hello from login");
           dispatch(authActions.loginError(error.message));
         }
       };
