@@ -39,14 +39,14 @@ export default function AuthForm() {
       <Formik
         initialValues={
           isRegister
-            ? { name: "", email: "", password: "" }
+            ? { name: "", email: "", password: "", policy: false }
             : { email: "", password: "" }
         }
         onSubmit={(values) => {
-          console.log(values);
+          const { name, email, password } = values;
           setSubmitting(true);
           isRegister
-            ? dispatch(userOperations.register(values))
+            ? dispatch(userOperations.register({ name, email, password }))
             : dispatch(userOperations.login(values));
           setTimeout(() => {
             setSubmitting(false);
