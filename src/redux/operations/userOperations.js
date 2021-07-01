@@ -1,9 +1,9 @@
 import authActions from "../actions/userActions";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://blog-server-practice.herokuapp.com";
+axios.defaults.baseURL = "http://blog-server-practice.herokuapp.com";
 
-const token = {
+const axiosToken = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
@@ -36,7 +36,9 @@ class UserAuth {
         }
       };
 
-      current = (credentials) => async (dispatch) => {
+      current = (credentials) => async (dispatch, getState) => {
+        const {auth: {token: persistedToken}} = getState();
+        axiosToken.set(persistedToken);
         dispatch(authActions.getCurrentUserRequest());
         try{
           const response = await axios.get("/blog/user", credentials);
@@ -52,6 +54,7 @@ class UserAuth {
         try{
           const response = await axios.patch("/blog/user", credentials);
           dispatch(authActions.logOutSuccess());
+          authActions.unset()
         }catch(error){
           dispatch(authActions.loginError(error.message));
         }

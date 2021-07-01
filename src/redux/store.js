@@ -17,6 +17,8 @@ import {
 } from "redux-persist";
 import auth from "./reducers/userReducer";
 
+  const authPersistConfig = {key: "auth", storage, whitelist: ['token']};
+
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
@@ -27,7 +29,7 @@ const middleware = [
 ];
 
 const rootReducer = combineReducers({
-    auth
+    auth: persistReducer(authPersistConfig, auth), 
 });
 
 const store = configureStore({
