@@ -58,6 +58,11 @@ ul {
 a {
   text-decoration: none;
   font-style: normal;
+  color: white;
+
+  &:active {
+    color: white;
+  }
 }
 
 button {

@@ -1,7 +1,15 @@
 .mainContainer {
-  background-color: grey;
+  background-color: black;
   display: flex;
-  justify-content: center;
+  width: 500px;
+  justify-content: start;
+  padding-left: 40px;
+  top: 250px;
+  right: -250px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .formContainer {
@@ -17,17 +25,20 @@
   border-radius: 10px;
   transition: all 250ms linear;
   outline: none;
+  background-color: black;
   &:not(:first-child) {
     margin-top: 20px;
   }
   &:hover {
-    border-color: rgb(107, 19, 19);
-    
+    background-color: white;
+    &::placeholder {
+      color: black;
     }
-    &::placeholder{
-        color: black;
-        font-style: italic;
-    }
+  }
+  &::placeholder {
+    color: white;
+    font-style: italic;
+  }
 }
 .spanFormError {
   color: red;
@@ -49,7 +60,13 @@
     margin-left: 20px;
   }
   &:hover {
-    background-color: rgb(107, 19, 19);
+    background-color: white;
+    color: black;
     border: none;
-    }
+  }
+}
+
+label {
+  margin-top: 20px;
+  color: white;
 }

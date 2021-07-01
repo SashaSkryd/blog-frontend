@@ -7,11 +7,11 @@ import routes from "./routes";
 import Header from "./components/Header/Header";
 
 export default function App(props) {
-  const routesMap = routes.map((route) => {
+  const routesMap = routes.map((route, i) => {
     return route.privated ? (
-      <PrivateRoute key={route.path} {...route} />
+      <PrivateRoute key={i} {...route} />
     ) : (
-      <PublicRoute key={route.path} {...route} />
+      <PublicRoute key={i} {...route} />
     );
   });
   return (

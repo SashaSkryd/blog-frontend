@@ -1,10 +1,19 @@
 .header {
   display: flex;
   background-color: black;
+  align-items: center;
   color: white;
   height: 40px;
   padding-left: 40px;
   padding-right: 40px;
+}
+
+nav {
+  height: 100%;
+
+  & ul {
+    height: 100%;
+  }
 }
 
 .auth-header {
@@ -14,4 +23,15 @@
 
 .nav-list {
   display: flex;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  transition: all 250ms linear;
+  &:hover {
+    background-color: white;
+    color: black;
+  }
 }

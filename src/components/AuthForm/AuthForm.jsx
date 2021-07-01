@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { NavLink } from "react-router-dom";
 import * as Yup from "yup";
 import userOperations from "../../redux/operations/userOperations";
 import { useDispatch } from "react-redux";
-import styles from './AuthForm.module.scss';
+import styles from "./AuthForm.module.scss";
 
 const registerSchema = Yup.object().shape({
   name: Yup.string()
@@ -15,6 +16,9 @@ const registerSchema = Yup.object().shape({
     .min(8, "Некорректная длинна поля!")
     .max(16, "Превышен лимит символов!")
     .required("Введите пароль!"),
+  policy: Yup.boolean()
+    .isTrue("Подтвердите свое согласие!")
+    .required("Подтвердите свое согласие!"),
 });
 
 const loginSchema = Yup.object().shape({
@@ -32,57 +36,93 @@ export default function AuthForm() {
 
   return (
     <div className={styles.mainContainer}>
-
-    
-    <Formik
-    
-      initialValues={
-        isRegister
-          ? { name: "", email: "", password: "" }
-          : { email: "", password: "" }
-      }
-      onSubmit={(values) => {
-        setSubmitting(true);
-        isRegister
-          ? dispatch(userOperations.register(values))
-          : dispatch(userOperations.login(values));
-        setTimeout(() => {
-          setSubmitting(false);
-        }, 500);
-      }}
-      validationSchema={isRegister ? registerSchema : loginSchema}
-    >
-
-      <Form>
-      <div className={styles.formContainer}>
-        {isRegister && (
-          <>
-            <Field type="name" name="name" placeholder="name" className={styles.inputForm}/>
-            <ErrorMessage name="name" component="span" className={styles.spanFormError} />
-          </>
-        )}
-        <Field type="email" name="email" placeholder="e-mail" className={styles.inputForm} />
-        <ErrorMessage name="email" component="span" className={styles.spanFormError} />
-        <Field type="password" name="password" placeholder="password" className={styles.inputForm} />
-        <ErrorMessage name="password" component="span" className={styles.spanFormError} />
-        </div>
-        <div className={styles.buttonContainer}>
-        <button type="submit" disabled={isSubmitting} className={styles.buttonForm}>
-          Submit
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            setRegister(!isRegister);
-          }}
-          className={styles.buttonForm}
-        >
-          {isRegister ? "Sign In" : "Sign Up"}
-        </button>
-        </div>
-        
-      </Form>
-    </Formik>
+      <Formik
+        initialValues={
+          isRegister
+            ? { name: "", email: "", password: "" }
+            : { email: "", password: "" }
+        }
+        onSubmit={(values) => {
+          console.log(values);
+          setSubmitting(true);
+          isRegister
+            ? dispatch(userOperations.register(values))
+            : dispatch(userOperations.login(values));
+          setTimeout(() => {
+            setSubmitting(false);
+          }, 500);
+        }}
+        validationSchema={isRegister ? registerSchema : loginSchema}
+      >
+        <Form>
+          <div className={styles.formContainer}>
+            {isRegister && (
+              <>
+                <Field
+                  type="name"
+                  name="name"
+                  placeholder="name"
+                  className={styles.inputForm}
+                />
+                <ErrorMessage
+                  name="name"
+                  component="span"
+                  className={styles.spanFormError}
+                />
+              </>
+            )}
+            <Field
+              type="email"
+              name="email"
+              placeholder="e-mail"
+              className={styles.inputForm}
+            />
+            <ErrorMessage
+              name="email"
+              component="span"
+              className={styles.spanFormError}
+            />
+            <Field
+              type="password"
+              name="password"
+              placeholder="password"
+              className={styles.inputForm}
+            />
+            <ErrorMessage
+              name="password"
+              component="span"
+              className={styles.spanFormError}
+            />
+            <label style={{ color: "white" }}>
+              <NavLink to="/">Privacy policy</NavLink>{" "}
+              <Field name="policy" type="checkbox" />
+            </label>
+            <ErrorMessage
+              name="policy"
+              component="span"
+              className={styles.spanFormError}
+            />
+          </div>
+          <div className={styles.buttonContainer}>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={styles.buttonForm}
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setRegister(!isRegister);
+              }}
+              className={styles.buttonForm}
+            >
+              {isRegister ? "Sign In" : "Sign Up"}
+            </button>
+          </div>
+        </Form>
+      </Formik>
     </div>
   );
 }

@@ -9,9 +9,9 @@ export default function Header() {
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
   return (
-    <div className={`header ${true && "auth-header"}`}>
+    <div className={`header ${isAuth && "auth-header"}`}>
       <span className="logo">myBlog</span>
-      {true && (
+      {isAuth && (
         <>
           <nav>
             <ul className="nav-list">
@@ -22,7 +22,7 @@ export default function Header() {
               </li>
             </ul>
           </nav>
-          <UserMenu isAuth={true} name={"Artem"} />
+          <UserMenu isAuth={isAuth} name={name} />
         </>
       )}
     </div>
