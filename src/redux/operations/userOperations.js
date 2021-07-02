@@ -1,7 +1,7 @@
 import authActions from "../actions/userActions";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:5500";
+axios.defaults.baseURL = "https://blog-server-practice.herokuapp.com";
 
 const axiosToken = {
   set(token) {
