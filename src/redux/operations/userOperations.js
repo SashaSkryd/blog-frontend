@@ -1,7 +1,7 @@
 import authActions from "../actions/userActions";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://blog-server-practice.herokuapp.com";
+axios.defaults.baseURL = "http://localhost:5500";
 
 const axiosToken = {
   set(token) {
@@ -41,8 +41,9 @@ class UserAuth {
     } = getState();
     axiosToken.set(persistedToken);
     dispatch(authActions.getCurrentUserRequest());
+    console.log(persistedToken);
     try {
-      const response = await axios.get("/users/", credentials);
+      const response = await axios.get("/users/");
       dispatch(authActions.getCurrentUserSuccess(response.data));
     } catch (error) {
       dispatch(authActions.getCurrentUserError(error.message));
