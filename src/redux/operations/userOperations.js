@@ -1,7 +1,7 @@
 import authActions from "../actions/userActions";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://blog-frontend-practice-ne.herokuapp.com";
+axios.defaults.baseURL = "https://blog-backend-practice.herokuapp.com";
 
 const axiosToken = {
   set(token) {
@@ -17,6 +17,7 @@ class UserAuth {
     dispatch(authActions.registerRequest());
     try {
       const response = await axios.post("/users", credentials);
+      console.log("register", response);
       dispatch(authActions.registerSuccess(response.data));
     } catch (error) {
       dispatch(authActions.loginError(error.message));
@@ -41,6 +42,7 @@ class UserAuth {
     dispatch(authActions.getCurrentUserRequest());
     try {
       const response = await axios.get("/users");
+      console.log("current", response);
       dispatch(authActions.getCurrentUserSuccess(response.data));
     } catch (error) {
       dispatch(authActions.getCurrentUserError(error.message));
