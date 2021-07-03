@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import "./auth.scss";
 
