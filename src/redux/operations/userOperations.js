@@ -16,7 +16,7 @@ class UserAuth {
   register = (credentials) => async (dispatch) => {
     dispatch(authActions.registerRequest());
     try {
-      const response = await axios.post("/users", credentials);
+      const response = await axios.post("/users/", credentials);
       dispatch(authActions.registerSuccess(response.data));
     } catch (error) {
       dispatch(authActions.loginError(error.message));
@@ -26,7 +26,7 @@ class UserAuth {
   login = (credentials) => async (dispatch) => {
     dispatch(authActions.loginRequest());
     try {
-      const response = await axios.put("/users", credentials);
+      const response = await axios.put("/users/", credentials);
       dispatch(authActions.loginSuccess(response.data));
     } catch (error) {
       dispatch(authActions.loginError(error.message));
