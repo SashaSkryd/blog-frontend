@@ -1,7 +1,7 @@
 import authActions from "../actions/userActions";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://blog-backend-practice.herokuapp.com";
+axios.defaults.baseURL = "https://blog-server-practice.herokuapp.com";
 
 const axiosToken = {
   set(token) {
@@ -16,8 +16,7 @@ class UserAuth {
   register = (credentials) => async (dispatch) => {
     dispatch(authActions.registerRequest());
     try {
-      const response = await axios.post("/users", credentials);
-      console.log("register", response);
+      const response = await axios.post("/users/", credentials);
       dispatch(authActions.registerSuccess(response.data));
     } catch (error) {
       dispatch(authActions.loginError(error.message));
@@ -27,7 +26,7 @@ class UserAuth {
   login = (credentials) => async (dispatch) => {
     dispatch(authActions.loginRequest());
     try {
-      const response = await axios.put("/users", credentials);
+      const response = await axios.put("/users/", credentials);
       dispatch(authActions.loginSuccess(response.data));
     } catch (error) {
       dispatch(authActions.loginError(error.message));
@@ -41,8 +40,7 @@ class UserAuth {
     axiosToken.set(persistedToken);
     dispatch(authActions.getCurrentUserRequest());
     try {
-      const response = await axios.get("/users");
-      console.log("current", response);
+      const response = await axios.get("/users/");
       dispatch(authActions.getCurrentUserSuccess(response.data));
     } catch (error) {
       dispatch(authActions.getCurrentUserError(error.message));
@@ -52,7 +50,7 @@ class UserAuth {
   logout = (credentials) => async (dispatch) => {
     dispatch(authActions.logOutRequest());
     try {
-      await axios.patch("/users", credentials);
+      await axios.patch("/users/", credentials);
       dispatch(authActions.logOutSuccess());
       authActions.unset();
     } catch (error) {
