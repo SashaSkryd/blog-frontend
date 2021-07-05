@@ -37,6 +37,9 @@ class UserAuth {
     const {
       auth: { token: persistedToken },
     } = getState();
+    if(!persistedToken){
+      return
+    }
     axiosToken.set(persistedToken);
     dispatch(authActions.getCurrentUserRequest());
     try {
