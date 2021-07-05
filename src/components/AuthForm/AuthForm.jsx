@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import * as Yup from "yup";
 import userOperations from "../../redux/operations/userOperations";
 import { useDispatch } from "react-redux";
@@ -30,9 +30,10 @@ const loginSchema = Yup.object().shape({
 });
 
 export default function AuthForm() {
-  const [isSubmitting, setSubmitting] = useState(false);
+  
   const dispatch = useDispatch();
   const [isRegister, setRegister] = useState(true);
+  const history = useHistory();
 
   return (
     <div className={styles.mainContainer}>
@@ -44,13 +45,9 @@ export default function AuthForm() {
         }
         onSubmit={(values) => {
           const { name, email, password } = values;
-          setSubmitting(true);
           isRegister
-            ? dispatch(userOperations.register({ name, email, password }))
-            : dispatch(userOperations.login({email, password}));
-          setTimeout(() => {
-            setSubmitting(false);
-          }, 500);
+            ? dispatch(userOperations.register({ name, email, password }, history))
+            : dispatch(userOperations.login({email, password}, history));
         }}
         validationSchema={isRegister ? registerSchema : loginSchema}
       >
@@ -106,7 +103,6 @@ export default function AuthForm() {
           <div className={styles.buttonContainer}>
             <button
               type="submit"
-              disabled={isSubmitting}
               className={styles.buttonForm}
             >
               Submit

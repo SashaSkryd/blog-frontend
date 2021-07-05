@@ -13,21 +13,23 @@ const axiosToken = {
 };
 
 class UserAuth {
-  register = (credentials) => async (dispatch) => {
+  register = (credentials,history) => async (dispatch) => {
     dispatch(authActions.registerRequest());
     try {
       const response = await axios.post("/users/", credentials);
       dispatch(authActions.registerSuccess(response.data));
+      history.push('/');
     } catch (error) {
       dispatch(authActions.loginError(error.message));
     }
   };
 
-  login = (credentials) => async (dispatch) => {
+  login = (credentials,history) => async (dispatch) => {
     dispatch(authActions.loginRequest());
     try {
       const response = await axios.put("/users/", credentials);
       dispatch(authActions.loginSuccess(response.data));
+      history.push('/');
     } catch (error) {
       dispatch(authActions.loginError(error.message));
     }
