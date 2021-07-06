@@ -16,8 +16,9 @@ import {
   persistReducer,
 } from "redux-persist";
 import auth from "./reducers/userReducer";
+import posts from "./reducers/postReducer";
 
-  const authPersistConfig = {key: "auth", storage, whitelist: ['token']};
+const authPersistConfig = { key: "auth", storage, whitelist: ["token"] };
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -29,7 +30,8 @@ const middleware = [
 ];
 
 const rootReducer = combineReducers({
-    auth: persistReducer(authPersistConfig, auth), 
+  auth: persistReducer(authPersistConfig, auth),
+  posts,
 });
 
 const store = configureStore({
@@ -38,10 +40,11 @@ const store = configureStore({
   devTools: process.env.NODE_ENV === "development",
 });
 
-const persistor = persistStore(store)
+const persistor = persistStore(store);
 
 const exportedStore = {
-  store, persistor
-}
+  store,
+  persistor,
+};
 
 export default exportedStore;

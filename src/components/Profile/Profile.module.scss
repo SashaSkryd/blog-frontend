@@ -1,0 +1,30 @@
+.profileContent {
+  height: 400px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+  background-color: rgb(133, 130, 130);
+
+  display: flex;
+
+  & h1 {
+    margin: 0;
+    margin-left: 15px;
+    text-align: center;
+    color: white;
+    line-height: 1;
+  }
+}
+
+.avatarWrapper {
+  background-color: black;
+  height: 100%;
+  width: 300px;
+  border-radius: 5px;
+
+  & > img {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+  }
+}
