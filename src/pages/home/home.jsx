@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 export default function Home() {
+
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);
   const name = useSelector((state) => state.auth.user.name);
   useEffect(() => {
-    console.log(name);
     dispatch(postOperations.getPosts(name));
   });
 
@@ -19,7 +19,7 @@ export default function Home() {
     <div className="container">
       <Profile />
       <EditPosts />
-      <Posts />
+      <Posts posts={posts} />
     </div>
   );
 }

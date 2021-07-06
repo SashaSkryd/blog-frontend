@@ -6,6 +6,7 @@ const init = [];
 
 const posts = createReducer(init, {
   [postActions.getPostsSuccess]: (_, {payload}) =>payload,
+  [postActions.removePostSuccess]: (state, {payload}) => 
 });
 
 export default combineReducers({
