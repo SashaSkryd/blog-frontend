@@ -1,0 +1,36 @@
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, 0);
+    transition: all 500ms linear;
+
+}
+.overlay-entered{
+    transition: all 250ms linear;
+    background-color: rgba(0,0,0, 0.7);
+
+}
+.formWrapper{
+    background-color: white;
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    transform: translate(-50%, -50%);
+    // transition: all 500ms linear;
+
+}
+.wrapper-entered{
+    // background-color: white;
+    // position: absolute;
+    top: 50%;
+    // left: 50%;
+    // width: 500px;
+    // height: 500px;
+    // transform: translate(-50%, -50%);
+    transition: all 500ms linear;
+}

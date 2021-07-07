@@ -1,7 +1,9 @@
 import authActions from "../actions/userActions";
 import axios from "axios";
+import postOperations from './postOperations';
 
 axios.defaults.baseURL = "https://blog-server-practice.herokuapp.com";
+// axios.defaults.baseURL = "http://localhost:5500";
 
 const axiosToken = {
   set(token) {
@@ -18,6 +20,7 @@ class UserAuth {
     try {
       const response = await axios.post("/users/", credentials);
       dispatch(authActions.registerSuccess(response.data));
+      dispatch(postOperations.getPosts(response.data.id))
       history.push('/');
     } catch (error) {
       dispatch(authActions.loginError(error.message));
@@ -29,6 +32,7 @@ class UserAuth {
     try {
       const response = await axios.put("/users/", credentials);
       dispatch(authActions.loginSuccess(response.data));
+      dispatch(postOperations.getPosts(response.data.id))
       history.push('/');
     } catch (error) {
       dispatch(authActions.loginError(error.message));
@@ -47,6 +51,7 @@ class UserAuth {
     try {
       const response = await axios.get("/users/");
       dispatch(authActions.getCurrentUserSuccess(response.data));
+      dispatch(postOperations.getPosts(response.data.id))
     } catch (error) {
       dispatch(authActions.getCurrentUserError(error.message));
     }
@@ -57,7 +62,7 @@ class UserAuth {
     try {
       await axios.patch("/users/", credentials);
       dispatch(authActions.logOutSuccess());
-      authActions.unset();
+      axiosToken.unset();
     } catch (error) {
       dispatch(authActions.loginError(error.message));
     }

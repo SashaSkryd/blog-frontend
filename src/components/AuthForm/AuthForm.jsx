@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import userOperations from "../../redux/operations/userOperations";
 import { useDispatch } from "react-redux";
 import styles from "./AuthForm.module.scss";
-
+// import postOperations from "../../redux/operations/postOperations";
 const registerSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Некорректная длинна поля!")
@@ -48,6 +48,7 @@ export default function AuthForm() {
           isRegister
             ? dispatch(userOperations.register({ name, email, password }, history))
             : dispatch(userOperations.login({email, password}, history));
+            
         }}
         validationSchema={isRegister ? registerSchema : loginSchema}
       >

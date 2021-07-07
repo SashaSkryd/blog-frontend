@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Posts.module.scss";
 import postOperations from "../../redux/operations/postOperations";
+import { useDispatch } from "react-redux";
 
 export default function Posts({ posts }) {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ export default function Posts({ posts }) {
           <li key={i} className={styles.postItem}>
             <div className={styles.postHeader}>
               <h2 className={styles.postTitle}>{el.title}</h2>
-              <span className={styles.postAuthor}>{`${el.author} at`}</span>
+              <span className={styles.postAuthor}>{`${el.authorName} at`}</span>
               <span className={styles.postDate}>{el.date}</span>
             </div>
             <div className={styles.imageWrapper}>
