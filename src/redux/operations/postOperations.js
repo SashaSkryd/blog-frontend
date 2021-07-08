@@ -14,9 +14,10 @@ class UserPost {
   addPost = (credentials) => async (dispatch, getState) => {
     dispatch(postActions.addPostRequest());
     try {
-      const token = getState().auth.token;
+      const id = getState().auth.user.id;
       const post = await axios.post("/posts", credentials);
       dispatch(postActions.addPostSuccess(post.data));
+      dispatch(this.getPosts(id));
     } catch (error) {
       dispatch(postActions.addPostError(error.message));
     }

@@ -26,11 +26,13 @@
   transition: all 250ms linear;
   outline: none;
   background-color: black;
+  color: white;
   &:not(:first-child) {
     margin-top: 20px;
   }
   &:hover {
     background-color: white;
+    color: black;
     &::placeholder {
       color: black;
     }
