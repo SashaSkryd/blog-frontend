@@ -2,6 +2,7 @@
   margin-top: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-right: 10px;
   border-radius: 10px;
   background-color: rgb(133, 130, 130);
 
@@ -12,9 +13,9 @@
   margin: 0 10px 0 10px;
   border-radius: 5px;
   width: 10%;
-
 }
 .inputSearch {
+  border: none;
   outline: none;
   padding: 5px 5px;
   font-weight: 400;

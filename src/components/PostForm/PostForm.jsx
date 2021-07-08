@@ -4,9 +4,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import postOperations from "../../redux/operations/postOperations";
 import "./PostForm.scss";
 import { useDispatch } from "react-redux";
+
 export default function PostForm({ setOverlay }) {
- const dispatch = useDispatch();
- 
+  const dispatch = useDispatch();
+
   return (
     <div
       id="overlay"
@@ -14,48 +15,55 @@ export default function PostForm({ setOverlay }) {
       onClick={(e) => (e.target.id === "overlay" ? setOverlay(false) : null)}
     >
       <div id="wrapper" className="formWrapper">
-        <Formik initialValues={{ title: "", text: "", images: "" }}
-        onSubmit={(values)=>{
-          const {title,text}= values;
-          dispatch(postOperations.addPost({title,date: `${new Date().toLocaleTimeString().slice(0,-3)} ${new Date().toLocaleDateString()}`,text}));
-          setOverlay(false)
-        }}
+        <Formik
+          initialValues={{ title: "", text: "", images: "" }}
+          onSubmit={(values) => {
+            const { title, text } = values;
+            dispatch(
+              postOperations.addPost({
+                title,
+                date: `${new Date()
+                  .toLocaleTimeString()
+                  .slice(0, -3)} ${new Date().toLocaleDateString()}`,
+                text,
+              }),
+            );
+            setOverlay(false);
+          }}
         >
           <Form>
             <Field
               type="title"
               name="title"
-              placeholder="Title"
-              className={styles.title}
+              placeholder="Come up with a title for your post"
+              className={styles.formInput}
             />
-            <ErrorMessage
-              name="title"
-              component="span"
-              className={styles.spanFormError}
-            />
+
             <Field
               type="textarea"
               as="textarea"
               name="text"
-              placeholder="Textarea"
+              placeholder="Write your text here"
               className={styles.textarea}
             />
-            <ErrorMessage
-              name="text"
-              component="span"
-              className={styles.spanFormError}
-            />
-            <Field name="images" type="file" className={styles.fileButton} />
-            <ErrorMessage
-              name="images"
-              component="span"
-              className={styles.spanFormError}
-            />
 
-            <div>
-              <button type="submit" >Confirm</button>
+            <label>
+              Choose image for your post
+              <Field
+                name="images"
+                type="file"
+                className={styles.image}
+                placeholder="Choose image for your post"
+              />
+            </label>
+
+            <div className={styles.formButtonWrapper}>
+              <button className={styles.formButton} type="submit">
+                Confirm
+              </button>
               <button
                 type="button"
+                className={styles.formButton}
                 onClick={() => {
                   setOverlay(false);
                 }}

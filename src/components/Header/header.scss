@@ -8,6 +8,15 @@
   padding-right: 40px;
 }
 
+.active {
+  border-bottom: solid 4px white;
+  padding: 20px 0;
+
+  &:hover {
+    border-bottom: solid 4px black;
+  }
+}
+
 nav {
   height: 100%;
 

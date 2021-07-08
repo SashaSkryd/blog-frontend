@@ -10,7 +10,7 @@ export default function Posts({ posts }) {
     <section className={styles.postContent}>
       <ul>
         {posts.map((el, i) => (
-          <li key={i} className={styles.postItem}>
+          <li key={i} id={el._id} className={styles.postItem}>
             <div className={styles.postHeader}>
               <h2 className={styles.postTitle}>{el.title}</h2>
               <span className={styles.postAuthor}>{`${el.authorName} at`}</span>
